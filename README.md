@@ -11,8 +11,7 @@
 ### Подготовительный этап и необходимое ПО:
 1. Установить IntelliJ IDEA;
 1. Установить Docker Desktop;
-1. Склонировать удаленный репозиторий с Github на свой ПК  [ссылка на проект](https://github.com/AndyS25/Diploma_project).
-1. Открыть проект в IntelliJ IDEA.
+1. Склонировать удаленный репозиторий с Github на свой ПК [ссылка на проект](https://github.com/AndyS25/Diplom_project).
 
 ### Подключение к PostgreSQL
 
@@ -20,7 +19,7 @@
 1. Запустить IntelliJ IDEA и открыть склонированный проект
 1. Проверить и поправить при необходимости настройки в файлах в корне проекта:
 
-в файле [application.properties](https://github.com/AndyS25/Diploma_project/blob/main/application.properties) должны быть следующие данные:
+в файле [application.properties](https://github.com/AndyS25/Diplom_project/blob/main/application.properties) должны быть следующие данные:
 ```
 spring.credit-gate.url=http://localhost:9999/credit
 spring.payment-gate.url=http://localhost:9999/payment
@@ -29,7 +28,7 @@ spring.datasource.url=jdbc:postgresql://localhost:5432/app
 spring.datasource.username=app
 spring.datasource.password=pass
 ```
-в файле [build.gradle](https://github.com/AndyS25/Diploma_project/blob/d852bbac7ccb022b1198a15dfa4a2d5f6e9d8bfb/build.gradle#L41) в блоке test
+в файле [build.gradle](https://github.com/AndyS25/Diplom_project/blob/993fe71fdcc0c0b64063637cbd33de8a99ffa683/build.gradle#L41) в блоке test
 ```
 test {
     useJUnitPlatform()
@@ -57,7 +56,7 @@ test {
 1. Перейти во второе окно терминала, где запущено приложение и остановить его работу:
 
    **CTRL+C**
-1. Перейти в первое окно терминала, где запущены контейнеры и остановить их работу с помощью команды:
+1. Перейти в первое окно терминала, где запущены контейнеры и остановить их работу и удалить с помощью команды:
 
    `docker compose down`
    </a>
@@ -68,7 +67,7 @@ test {
 1. Запустить IntelliJ IDEA и открыть склонированный проект
 1. Проверить и поправить при необходимости настройки в файлах в корне проекта:
 
-в файле application.properties должны быть следующие данные:
+в файле [application.properties](https://github.com/AndyS25/Diplom_project/blob/main/application.properties) должны быть следующие данные:
 ```
 spring.credit-gate.url=http://localhost:9999/credit
 spring.payment-gate.url=http://localhost:9999/payment
@@ -77,7 +76,7 @@ spring.datasource.url=jdbc:mysql://localhost:3306/app
 spring.datasource.username=app
 spring.datasource.password=pass
 ```
-в файле build.gradle в блоке test
+в файле [build.gradle](https://github.com/AndyS25/Diplom_project/blob/993fe71fdcc0c0b64063637cbd33de8a99ffa683/build.gradle#L41) в блоке test
 ```
 test {
     useJUnitPlatform()
@@ -105,7 +104,7 @@ test {
 1. Перейти во второе окно терминала, где запущено приложение и остановить его работу:
 
    **CTRL+C**
-1. Перейти в первое окно терминала, где запущены контейнеры и остановить их работу с помощью команды:
+1. Перейти в первое окно терминала, где запущены контейнеры и остановить их работу и удалить с помощью команды:
 
    `docker compose down`
    </a>
