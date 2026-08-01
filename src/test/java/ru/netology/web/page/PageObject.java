@@ -12,7 +12,6 @@ import static com.codeborne.selenide.Selenide.$$;
 
 
 public class PageObject {
-    private final SelenideElement heading = $("h2.heading");
     private final SelenideElement headingBuy = $(byText("Оплата по карте"));
     private final SelenideElement headingBuyOnCredit = $(byText("Кредит по данным карты"));
 
@@ -48,17 +47,18 @@ public class PageObject {
             .$(byText("Неверный формат"));
 
     public PageObject() {
+        SelenideElement heading = $("h2.heading");
         heading.shouldBe(visible);
     }
 
-    public void selectBuy(String expectedText) {
+    public void selectBuy() {
         buttonBuy.click();
-        headingBuy.shouldHave(exactText(expectedText)).shouldBe(visible);
+        headingBuy.shouldBe(visible);
     }
 
-    public void selectBuyInCredit(String expectedText) {
+    public void selectBuyInCredit() {
         buttonBuyOnCredit.click();
-        headingBuyOnCredit.shouldHave(exactText(expectedText)).shouldBe(visible);
+        headingBuyOnCredit.shouldBe(visible);
     }
 
     public void inputDataFieldsFormCard(CardInfo card) {
@@ -70,44 +70,44 @@ public class PageObject {
         buttonContinue.click();
     }
 
-    public void verifySuccessfulNotification(String expectedText) {
-        notificationSuccessfully.shouldBe(visible, Duration.ofSeconds(15)).shouldHave(exactText(expectedText));
+    public void verifySuccessfulNotification() {
+        notificationSuccessfully.shouldBe(visible, Duration.ofSeconds(15));
     }
 
-    public void verifyErrorNotification(String expectedText) {
-        notificationError.shouldBe(visible, Duration.ofSeconds(15)).shouldHave(exactText(expectedText));
+    public void verifyErrorNotification() {
+        notificationError.shouldBe(visible, Duration.ofSeconds(15));
     }
 
-    public void verifyErrorFieldCardNumber(String expectedText) {
-        errorFieldCardNumber.shouldBe(visible).shouldHave(exactText(expectedText));
+    public void verifyErrorFieldCardNumber() {
+        errorFieldCardNumber.shouldBe(visible);
     }
 
-    public void verifyErrorFieldMonth(String expectedText) {
-        errorFieldMonth.shouldBe(visible).shouldHave(exactText(expectedText));
+    public void verifyErrorFieldMonth() {
+        errorFieldMonth.shouldBe(visible);
     }
 
-    public void verifyErrorFieldMonthLessCurrentThisYear(String expectedText) {
-        errorFieldMonthLessCurrentThisYear.shouldBe(visible).shouldHave(exactText(expectedText));
+    public void verifyErrorFieldMonthLessCurrentThisYear() {
+        errorFieldMonthLessCurrentThisYear.shouldBe(visible);
     }
 
-    public void verifyErrorFieldYear(String expectedText) {
-        errorFieldYear.shouldBe(visible).shouldHave(exactText(expectedText));
+    public void verifyErrorFieldYear() {
+        errorFieldYear.shouldBe(visible);
     }
 
-    public void verifyErrorFieldYearLessCurrent(String expectedText) {
-        errorFieldYearLessCurrent.shouldBe(visible).shouldHave(exactText(expectedText));
+    public void verifyErrorFieldYearLessCurrent() {
+        errorFieldYearLessCurrent.shouldBe(visible);
     }
 
-    public void verifyErrorFieldYearMore6FromCurrent(String expectedText) {
-        errorFieldYearMore6FromCurrent.shouldBe(visible).shouldHave(exactText(expectedText));
+    public void verifyErrorFieldYearMore6FromCurrent() {
+        errorFieldYearMore6FromCurrent.shouldBe(visible);
     }
 
-    public void verifyErrorFieldOwner(String expectedText) {
-        errorFieldOwner.shouldBe(visible).shouldHave(exactText(expectedText));
+    public void verifyErrorFieldOwner() {
+        errorFieldOwner.shouldBe(visible);
     }
 
-    public void verifyErrorFieldCVC(String expectedText) {
-        errorFieldCVC.shouldBe(visible).shouldHave(exactText(expectedText));
+    public void verifyErrorFieldCVC() {
+        errorFieldCVC.shouldBe(visible);
     }
 
 }

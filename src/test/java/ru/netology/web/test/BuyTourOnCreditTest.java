@@ -35,13 +35,13 @@ public class BuyTourOnCreditTest {
     @BeforeEach
     void setUp() {
         page = open("http://localhost:8080", PageObject.class);
-        page.selectBuyInCredit("Кредит по данным карты");
+        page.selectBuyInCredit();
     }
 
     @Test
     void shouldSuccessfulBuyTourInCreditCardStatusApproved() {
         page.inputDataFieldsFormCard(DataHelper.getCardStatusApproved());
-        page.verifySuccessfulNotification("Операция одобрена Банком.");
+        page.verifySuccessfulNotification();
 
         assertEquals("APPROVED", SQLHelper.getStatusCreditRequestEntity());
     }
@@ -49,7 +49,7 @@ public class BuyTourOnCreditTest {
     @Test
     void shouldRefusalBuyTourInCreditCardStatusDeclined() {
         page.inputDataFieldsFormCard(DataHelper.getCardStatusDeclined());
-        page.verifyErrorNotification("Ошибка! Банк отказал в проведении операции.");
+        page.verifyErrorNotification();
 
         assertEquals("DECLINED", SQLHelper.getStatusCreditRequestEntity());
     }
@@ -57,11 +57,11 @@ public class BuyTourOnCreditTest {
     @Test
     void shouldCardEmptyFields() {
         page.inputDataFieldsFormCard(DataHelper.getCardEmptyFields());
-        page.verifyErrorFieldCardNumber("Неверный формат");
-        page.verifyErrorFieldMonth("Неверный формат");
-        page.verifyErrorFieldYear("Неверный формат");
-        page.verifyErrorFieldOwner("Поле обязательно для заполнения");
-        page.verifyErrorFieldCVC("Неверный формат");
+        page.verifyErrorFieldCardNumber();
+        page.verifyErrorFieldMonth();
+        page.verifyErrorFieldYear();
+        page.verifyErrorFieldOwner();
+        page.verifyErrorFieldCVC();
 
         assertNull(SQLHelper.getStatusCreditRequestEntity());
     }
@@ -69,7 +69,7 @@ public class BuyTourOnCreditTest {
     @Test
     void shouldCardNumberEmpty() {
         page.inputDataFieldsFormCard(DataHelper.getCardNumberEmpty());
-        page.verifyErrorFieldCardNumber("Неверный формат");
+        page.verifyErrorFieldCardNumber();
 
         assertNull(SQLHelper.getIdOrderEntity());
     }
@@ -77,7 +77,7 @@ public class BuyTourOnCreditTest {
     @Test
     void shouldCardNumber15Digits() {
         page.inputDataFieldsFormCard(DataHelper.getCardNumber15Digits());
-        page.verifyErrorFieldCardNumber("Неверный формат");
+        page.verifyErrorFieldCardNumber();
 
         assertNull(SQLHelper.getIdOrderEntity());
     }
@@ -85,7 +85,7 @@ public class BuyTourOnCreditTest {
     @Test
     void shouldCardNumber17Digits() {
         page.inputDataFieldsFormCard(DataHelper.getCardNumber17Digits());
-        page.verifyErrorNotification("Ошибка! Банк отказал в проведении операции.");
+        page.verifyErrorNotification();
 
         assertNull(SQLHelper.getIdOrderEntity());
     }
@@ -93,7 +93,7 @@ public class BuyTourOnCreditTest {
     @Test
     void shouldCardNumber16Symbols() {
         page.inputDataFieldsFormCard(DataHelper.getCardNumber16Symbols());
-        page.verifyErrorFieldCardNumber("Неверный формат");
+        page.verifyErrorFieldCardNumber();
 
         assertNull(SQLHelper.getIdOrderEntity());
     }
@@ -101,7 +101,7 @@ public class BuyTourOnCreditTest {
     @Test
     void shouldMonthEmpty() {
         page.inputDataFieldsFormCard(DataHelper.getMonthEmpty());
-        page.verifyErrorFieldMonth("Неверный формат");
+        page.verifyErrorFieldMonth();
 
         assertNull(SQLHelper.getIdOrderEntity());
     }
@@ -109,7 +109,7 @@ public class BuyTourOnCreditTest {
     @Test
     void shouldMonthOneDigital() {
         page.inputDataFieldsFormCard(DataHelper.getMonthOneDigital());
-        page.verifyErrorFieldMonth("Неверный формат");
+        page.verifyErrorFieldMonth();
 
         assertNull(SQLHelper.getIdOrderEntity());
     }
@@ -117,7 +117,7 @@ public class BuyTourOnCreditTest {
     @Test
     void shouldMonthTwoZero() {
         page.inputDataFieldsFormCard(DataHelper.getMonthTwoZero());
-        page.verifyErrorFieldMonth("Неверный формат");
+        page.verifyErrorFieldMonth();
 
         assertNull(SQLHelper.getIdOrderEntity());
     }
@@ -125,7 +125,7 @@ public class BuyTourOnCreditTest {
     @Test
     void shouldMonthLessCurrentThisYear() {
         page.inputDataFieldsFormCard(DataHelper.getMonthLessCurrentThisYear());
-        page.verifyErrorFieldMonthLessCurrentThisYear("Неверно указан срок действия карты");
+        page.verifyErrorFieldMonthLessCurrentThisYear();
 
         assertNull(SQLHelper.getIdOrderEntity());
     }
@@ -133,7 +133,7 @@ public class BuyTourOnCreditTest {
     @Test
     void shouldMonthMore12() {
         page.inputDataFieldsFormCard(DataHelper.getMonthMore12());
-        page.verifyErrorFieldMonthLessCurrentThisYear("Неверно указан срок действия карты");
+        page.verifyErrorFieldMonthLessCurrentThisYear();
 
         assertNull(SQLHelper.getIdOrderEntity());
     }
@@ -141,7 +141,7 @@ public class BuyTourOnCreditTest {
     @Test
     void shouldYearEmpty() {
         page.inputDataFieldsFormCard(DataHelper.getYearEmpty());
-        page.verifyErrorFieldYear("Неверный формат");
+        page.verifyErrorFieldYear();
 
         assertNull(SQLHelper.getIdOrderEntity());
     }
@@ -149,7 +149,7 @@ public class BuyTourOnCreditTest {
     @Test
     void shouldYearOneDigital() {
         page.inputDataFieldsFormCard(DataHelper.getYearOneDigital());
-        page.verifyErrorFieldYear("Неверный формат");
+        page.verifyErrorFieldYear();
 
         assertNull(SQLHelper.getIdOrderEntity());
     }
@@ -157,7 +157,7 @@ public class BuyTourOnCreditTest {
     @Test
     void shouldYearLessCurrent() {
         page.inputDataFieldsFormCard(DataHelper.getYearLessCurrent());
-        page.verifyErrorFieldYearLessCurrent("Истёк срок действия карты");
+        page.verifyErrorFieldYearLessCurrent();
 
         assertNull(SQLHelper.getIdOrderEntity());
     }
@@ -165,7 +165,7 @@ public class BuyTourOnCreditTest {
     @Test
     void shouldYearMoreCurrentBy6() {
         page.inputDataFieldsFormCard(DataHelper.getYearMoreCurrentBy6());
-        page.verifyErrorFieldYearMore6FromCurrent("Неверно указан срок действия карты");
+        page.verifyErrorFieldYearMore6FromCurrent();
 
         assertNull(SQLHelper.getIdOrderEntity());
     }
@@ -173,7 +173,7 @@ public class BuyTourOnCreditTest {
     @Test
     void shouldOwnerCardEmpty() {
         page.inputDataFieldsFormCard(DataHelper.getOwnerCardEmpty());
-        page.verifyErrorFieldOwner("Поле обязательно для заполнения");
+        page.verifyErrorFieldOwner();
 
         assertNull(SQLHelper.getIdOrderEntity());
     }
@@ -181,7 +181,7 @@ public class BuyTourOnCreditTest {
     @Test
     void shouldOwnerCardOneSymbol() {
         page.inputDataFieldsFormCard(DataHelper.getOwnerCardOneSymbol());
-        page.verifyErrorFieldOwner("Поле обязательно для заполнения");
+        page.verifyErrorFieldOwner();
 
         assertNull(SQLHelper.getIdOrderEntity());
     }
@@ -189,7 +189,7 @@ public class BuyTourOnCreditTest {
     @Test
     void shouldOwnerCardCyrillic() {
         page.inputDataFieldsFormCard(DataHelper.getOwnerCardCyrillic());
-        page.verifyErrorFieldOwner("Поле обязательно для заполнения");
+        page.verifyErrorFieldOwner();
 
         assertNull(SQLHelper.getIdOrderEntity());
     }
@@ -197,7 +197,7 @@ public class BuyTourOnCreditTest {
     @Test
     void shouldCvcEmpty() {
         page.inputDataFieldsFormCard(DataHelper.getCvcEmpty());
-        page.verifyErrorFieldCVC("Неверный формат");
+        page.verifyErrorFieldCVC();
 
         assertNull(SQLHelper.getIdOrderEntity());
     }
@@ -205,7 +205,7 @@ public class BuyTourOnCreditTest {
     @Test
     void shouldCvcTwoDigital() {
         page.inputDataFieldsFormCard(DataHelper.getCvcTwoDigital());
-        page.verifyErrorFieldCVC("Неверный формат");
+        page.verifyErrorFieldCVC();
 
         assertNull(SQLHelper.getIdOrderEntity());
     }
