@@ -13,43 +13,22 @@
 1. Установить Docker Desktop;
 1. Склонировать удаленный репозиторий с Github на свой ПК [ссылка на проект](https://github.com/AndyS25/Diplom_project).
 
-### Подключение к PostgreSQL
+### Подключение к базе данных на PostgreSQL
 
 1. Запустить Docker Desktop
 1. Запустить IntelliJ IDEA и открыть склонированный проект
-1. Проверить и поправить при необходимости настройки в файлах в корне проекта:
+1. В терминале открытого проекта запустить контейнеры с помощью команды:
 
-в файле [application.properties](https://github.com/AndyS25/Diplom_project/blob/main/application.properties) должны быть следующие данные:
-```
-spring.credit-gate.url=http://localhost:9999/credit
-spring.payment-gate.url=http://localhost:9999/payment
-    #spring.datasource.url=jdbc:mysql://localhost:3306/app
-spring.datasource.url=jdbc:postgresql://localhost:5432/app
-spring.datasource.username=app
-spring.datasource.password=pass
-```
-в файле [build.gradle](https://github.com/AndyS25/Diplom_project/blob/993fe71fdcc0c0b64063637cbd33de8a99ffa683/build.gradle#L41) в блоке test
-```
-test {
-    useJUnitPlatform()
-    systemProperty 'selenide.headless', System.getProperty('selenide.headless')
-    //systemProperty 'db.url', System.getProperty('db.url', "jdbc:mysql://localhost:3306/app")
-    systemProperty 'db.url', System.getProperty('db.url', "jdbc:postgresql://localhost:5432/app")
-    systemProperty 'sut.url', System.getProperty('sut.url', 'http://localhost:8080')
-    systemProperty 'chromeoptions.prefs', System.getProperty('chromeoptions.prefs', "profile.password_manager_leak_detection=false")
-}
-```
-4. В терминале открытого проекта запустить контейнеры с помощью команды:
    `docker compose up`
 1. Открыть второе окно терминала и запустить приложение с помощью команды:
 
-   `java -jar .\artifacts\aqa-shop\aqa-shop.jar`
+   `java "-Dspring.datasource.url=jdbc:postgresql://localhost:5432/app" -jar artifacts/aqa-shop.jar`
 1. Открыть третье окно терминала и запустить прогон автотестов с помощью команды:
 
-   `.\gradlew clean test`
+   `./gradlew clean test "-Ddb.url=jdbc:postgresql://localhost:5432/app"`
 1. После окончания прогона автотестов создать отчёт Allure и открыть его в браузере с помощью команды в терминале:
 
-   `.\gradlew allureServe`
+   `./gradlew allureServe`
 1. Для закрытия отчёта выполнить в терминале следующие действия:
 
    нажать **CTRL+C**, ввести **y** и нажать  **Enter**
@@ -61,43 +40,22 @@ test {
    `docker compose down`
    </a>
 
-### Подключение SUT к MySQL
+### Подключение к базе данных на MySQL
 
 1. Запустить Docker Desktop
 1. Запустить IntelliJ IDEA и открыть склонированный проект
-1. Проверить и поправить при необходимости настройки в файлах в корне проекта:
+1. В терминале открытого проекта запустить контейнеры с помощью команды:
 
-в файле [application.properties](https://github.com/AndyS25/Diplom_project/blob/main/application.properties) должны быть следующие данные:
-```
-spring.credit-gate.url=http://localhost:9999/credit
-spring.payment-gate.url=http://localhost:9999/payment
-spring.datasource.url=jdbc:mysql://localhost:3306/app
-    #spring.datasource.url=jdbc:postgresql://localhost:5432/app
-spring.datasource.username=app
-spring.datasource.password=pass
-```
-в файле [build.gradle](https://github.com/AndyS25/Diplom_project/blob/993fe71fdcc0c0b64063637cbd33de8a99ffa683/build.gradle#L41) в блоке test
-```
-test {
-    useJUnitPlatform()
-    systemProperty 'selenide.headless', System.getProperty('selenide.headless')
-    systemProperty 'db.url', System.getProperty('db.url', "jdbc:mysql://localhost:3306/app")
-    //systemProperty 'db.url', System.getProperty('db.url', "jdbc:postgresql://localhost:5432/app")
-    systemProperty 'sut.url', System.getProperty('sut.url', 'http://localhost:8080')
-    systemProperty 'chromeoptions.prefs', System.getProperty('chromeoptions.prefs', "profile.password_manager_leak_detection=false")
-}
-```
-4. В терминале открытого проекта запустить контейнеры с помощью команды:
    `docker compose up`
 1. Открыть второе окно терминала и запустить приложение с помощью команды:
 
-   `java -jar .\artifacts\aqa-shop\aqa-shop.jar`
+   `java "-Dspring.datasource.url=jdbc:mysql://localhost:3306/app" -jar artifacts/aqa-shop.jar`
 1. Открыть третье окно терминала и запустить прогон автотестов с помощью команды:
 
-   `.\gradlew clean test`
+   `./gradlew clean test "-Ddb.url=jdbc:mysql://localhost:3306/app"`
 1. После окончания прогона автотестов создать отчёт Allure и открыть его в браузере с помощью команды в терминале:
 
-   `.\gradlew allureServe`
+   `./gradlew allureServe`
 1. Для закрытия отчёта выполнить в терминале следующие действия:
 
    нажать **CTRL+C**, ввести **y** и нажать  **Enter**
